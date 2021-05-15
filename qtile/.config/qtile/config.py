@@ -88,7 +88,8 @@ dracula = {
     'Pink':       '#ff79c6',
     'Purple':     '#bd93f9',
     'Red':        '#ff5555',
-    'Yellow':     '#f1fa8c'
+    'Yellow':     '#f1fa8c',
+    'Background2':'#44475a'
     }
 
 
@@ -163,89 +164,95 @@ screens = [
         top=bar.Bar(
             [
                 separator(),
-                icon(text='  ', fg='Cyan'),
-                separator(),
+                #icon(text='  ', fg='Cyan'),
+                #separator(),
                 widget.GroupBox(
                     **base(),
-                    active=dracula['Red'],
-                    inactive=dracula['Inactive']
+                    margin_y = 5,
+                    margin_x = 0,
+                    active=dracula['Cyan'],
+                    inactive=dracula['Inactive'],
+                    highlight_method='block',
+                    rounded=False,
+                    highlight_color=dracula['Background'],
+                    this_current_screen_border=dracula['Background2'],
+                    borderwidth=2
                     ),
-                pipe(),
-                separator(),
-                widget.Prompt(
+                widget.Spacer(
                     **base(),
-                    prompt="{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
                     ),
-                widget.WindowName(
-                    **base()
+                widget.Cmus(
+                    **base(),
                     ),
-                pipe(),
                 icon(
                     text='  ',
-                    fg='Pink'
+                    fg='Inactive'
                     ),
                 widget.CheckUpdates(
                     background=dracula['Background'],
-                    colour_have_updates=dracula['Green'],
+                    colour_have_updates=dracula['Cyan'],
                     colour_no_updates=dracula['Inactive'],
                     display_format='{updates}',
+                    distro='Arch',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Syu')},
-                    update_interval=3000
+                    update_interval=1800,
+                    no_update_string='0'
                     ),
                 pipe(),
                 icon(
                     text='  ',
-                    fg='Orange'
+                    fg='Green'
                     ),
                 widget.Memory(
-                    **base(fg='Orange'),
+                    **base(fg='Green'),
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                     padding = 5
                     ),
                 pipe(),
                 icon(
                     text='  ',
-                    fg='Purple'
+                    fg='Orange'
                     ),
                 widget.CPU(
-                    **base(fg='Purple'),
+                    **base(fg='Orange'),
                     format='{freq_current}GHz {load_percent}%',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')}
                     ),
                 pipe(),
                 icon(
-                    text='  ',
-                    fg='Yellow'
+                    text='  ',
+                    fg='Red'
                     ),
                 widget.Net(
-                    **base(fg='Yellow'),
-                    interface = "enp0s20f0u3u4",
-                    format = '{interface}',
-                    padding = 5
+                    **base(fg='Red'),
+                    interface="enp0s20f0u3u4",
+                    format='{interface}',
+                    padding=5,
+                    update_interval=1
                     ),
                 pipe(),
                 icon(
                     text=' 盛 ',
-                    fg='Green'
+                    fg='Purple'
                     ),
                 widget.Backlight(
-                    **base(fg='Green'),
+                    **base(fg='Purple'),
                     backlight_name='intel_backlight',
                     format='{percent:2.0%}',
                     ),
                 pipe(),
                 icon(
                     text=' 墳',
-                    fg='Red'
+                    fg='Pink'
                     ),
                 widget.Volume(
-                    **base(fg='Red'),
+                    **base(fg='Pink'),
                     padding=5
                     ),
                 pipe(),
                 widget.CurrentLayoutIcon(
                     **base(),
-                    scale=0.7
+                    scale=0.5
                     ),
                 pipe(),
                 widget.Systray(
@@ -257,6 +264,7 @@ screens = [
                     **base(fg='Yellow'), 
                     format='[%d/%m - %H:%M]'
                     ),
+                separator()
             ],
             28,
         ),
