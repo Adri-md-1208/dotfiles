@@ -65,7 +65,7 @@ keys = [
 #   GROUPS                            #
 #######################################
 
-group_list = ['DEV', 'WWW', 'MUS', 'VID', 'DOC', 'SYS', 'PY3', 'JAVA']
+group_list = ['DEV', 'WEB', 'MUS', 'VID', 'DOC', 'SYS', 'PY3', 'JAVA']
 groups = [Group(name) for name in group_list]
 
 for i, group in enumerate(groups):
@@ -82,7 +82,7 @@ dracula = {
     'Background': '#282a36',
     'Foreground': '#f8f8f2',
     'Inactive':   '#6272a4',
-    'Cyan':       '#8be9fd',
+    'Blue':       '#8be9fd',
     'Green':      '#50fa7b',
     'Orange':     '#ffb86c',
     'Pink':       '#ff79c6',
@@ -92,13 +92,28 @@ dracula = {
     'Background2':'#44475a'
     }
 
+gruvbox = {
+    'Background': '#282828',
+    'Foreground': '#ebdbb2',
+    'Inactive':   '#a89984',
+    'Blue':       '#458588',
+    'Green':      '#98971a',
+    'Orange':     '#fe8019',
+    'Pink':       '#d3869b',
+    'Purple':     '#b16286',
+    'Red':        '#cc241d',
+    'Yellow':     '#fabd2f',
+    'Background2':'#504945'
+    }
+
+colors = gruvbox
 
 #######################################
 #   LAYOUTS                           #
 #######################################
 
 layouts_conf = {
-    'border_focus': dracula['Cyan'],
+    'border_focus': colors['Blue'],
     'border_width': 2,
     'margin': 10
     }
@@ -107,7 +122,9 @@ layouts = [
       layout.MonadTall(**layouts_conf),
       layout.MonadWide(**layouts_conf),
       layout.Max(**layouts_conf),
-    # layout.Columns(),
+      layout.Columns(
+          border_width=0
+          ),
     # layout.Stack(),
     # layout.Bsp(),
     # layout.Matrix(),
@@ -131,8 +148,8 @@ extension_defaults = widget_defaults.copy()
 
 def base(fg='Foreground', bg='Background'): 
     return {
-        'foreground': dracula[fg],
-        'background': dracula[bg]
+        'foreground': colors[fg],
+        'background': colors[bg]
         }
 
 def separator():
@@ -164,18 +181,18 @@ screens = [
         top=bar.Bar(
             [
                 separator(),
-                #icon(text='  ', fg='Cyan'),
+                #icon(text='  ', fg='Blue'),
                 #separator(),
                 widget.GroupBox(
                     **base(),
                     margin_y = 5,
                     margin_x = 0,
-                    active=dracula['Cyan'],
-                    inactive=dracula['Inactive'],
+                    active=colors['Foreground'],
+                    inactive=colors['Inactive'],
                     highlight_method='block',
                     rounded=False,
-                    highlight_color=dracula['Background'],
-                    this_current_screen_border=dracula['Background2'],
+                    highlight_color=colors['Background'],
+                    this_current_screen_border=colors['Background2'],
                     borderwidth=2
                     ),
                 widget.Spacer(
@@ -189,12 +206,12 @@ screens = [
                     fg='Inactive'
                     ),
                 widget.CheckUpdates(
-                    background=dracula['Background'],
-                    colour_have_updates=dracula['Cyan'],
-                    colour_no_updates=dracula['Inactive'],
+                    background=colors['Background'],
+                    colour_have_updates=colors['Foreground'],
+                    colour_no_updates=colors['Inactive'],
                     display_format='{updates}',
                     distro='Arch',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Syu')},
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                     update_interval=1800,
                     no_update_string='0'
                     ),
@@ -266,7 +283,7 @@ screens = [
                     ),
                 separator()
             ],
-            28,
+            30,
         ),
     ),
 ]
@@ -290,7 +307,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
