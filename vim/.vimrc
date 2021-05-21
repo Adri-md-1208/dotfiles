@@ -18,12 +18,17 @@ call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim',{'as':'dracula'}
 Plug 'morhetz/gruvbox'
 
+" Airline
+Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
+
 " Movement
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Files
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
@@ -33,6 +38,10 @@ set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 hi Normal guibg=NONE ctermbg=NONE
 
+" Airline
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
+
 " NERDTree
 let NERDTreeQuitOnOpen=1
 
@@ -40,3 +49,7 @@ let NERDTreeQuitOnOpen=1
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
 nmap <Leader>nt :NERDTreeFind<CR>
+nmap <leader>w :w<CR>
+nmap <leader>q :q<CR>
+nmap <leader>c ciw
+nmap <leader>f :FZF<CR>
