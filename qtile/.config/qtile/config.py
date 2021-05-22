@@ -89,7 +89,8 @@ dracula = {
     'Purple':     '#bd93f9',
     'Red':        '#ff5555',
     'Yellow':     '#f1fa8c',
-    'Background2':'#44475a'
+    'Background2':'#44475a',
+    'Salmon':     '#ff9580'
     }
 
 gruvbox = {
@@ -103,7 +104,8 @@ gruvbox = {
     'Purple':     '#b16286',
     'Red':        '#cc241d',
     'Yellow':     '#fabd2f',
-    'Background2':'#504945'
+    'Background2':'#504945',
+    'Salmon':     '#8f3f71'
     }
 
 colors = gruvbox
@@ -113,7 +115,7 @@ colors = gruvbox
 #######################################
 
 layouts_conf = {
-    'border_focus': colors['Blue'],
+    'border_focus': colors['Green'],
     'border_width': 2,
     'margin': 10
     }
@@ -242,7 +244,7 @@ screens = [
                     ),
                 widget.Net(
                     **base(fg='Red'),
-                    interface="enp0s20f0u3u4",
+                    interface="wlan0",
                     format='{interface}',
                     padding=5,
                     update_interval=1
@@ -250,21 +252,30 @@ screens = [
                 pipe(),
                 icon(
                     text=' 盛 ',
-                    fg='Purple'
+                    fg='Pink'
                     ),
                 widget.Backlight(
-                    **base(fg='Purple'),
+                    **base(fg='Pink'),
                     backlight_name='intel_backlight',
                     format='{percent:2.0%}',
                     ),
                 pipe(),
                 icon(
                     text=' 墳',
-                    fg='Pink'
+                    fg='Purple'
                     ),
                 widget.Volume(
-                    **base(fg='Pink'),
+                    **base(fg='Purple'),
                     padding=5
+                    ),
+                pipe(),
+                icon(
+                    text=' ',
+                    fg='Salmon'
+                    ),
+                widget.Battery(
+                    **base(fg='Salmon'),
+                    format='{percent:2.0%}'
                     ),
                 pipe(),
                 widget.CurrentLayoutIcon(
@@ -307,7 +318,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = False
+follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
