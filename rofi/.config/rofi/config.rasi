@@ -1,9 +1,17 @@
+configuration {
+  display-drun: " ﱮ ";
+  show-icons: true;
+  drun-display-format: "{icon} {name}";
+  combi-modi: "drun";
+}
+
 * {
   background-color: #282828;
   border-color: #282828;
   text-color: #ebdbb2;
   spacing: 0;
   width: 512px;
+  font: "Caskaydia Cove Nerd Font 15";
 }
 
 inputbar {
@@ -40,4 +48,9 @@ element {
 
 element selected {
   background-color: #504945;
+}
+
+element-icon {
+  size: 22px;
+  border: 0px;
 }
