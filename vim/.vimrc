@@ -1,3 +1,9 @@
+" VIM CONFIG
+"
+" @Adri-md-1208
+" adri.md.2001@gmail.com
+" 2021
+
 set number
 set mouse=a
 set numberwidth=1
@@ -11,6 +17,7 @@ set sw=2
 set relativenumber
 set laststatus=2
 set noshowmode
+" set fillchars=eob:\ ,
 
 call plug#begin('~/.vim/plugged')
 
@@ -30,6 +37,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
+" Autocompletion
+Plug 'Valloric/YouCompleteMe'
+
+" Python
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+
 call plug#end()
 
 " Themes
@@ -38,12 +52,45 @@ set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 hi Normal guibg=NONE ctermbg=NONE
 
+" Pathogen
+execute pathogen#infect()
+
 " Airline
 let g:lightline = {}
 let g:lightline.colorscheme = 'gruvbox'
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
+
+" YCM
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+" Python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+let python_highlight_all=1
+
+" Web development
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
 
 " Keymaps
 let mapleader=" "
@@ -53,3 +100,4 @@ nmap <leader>w :w<CR>
 nmap <leader>q :q<CR>
 nmap <leader>c ciw
 nmap <leader>f :FZF<CR>
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
