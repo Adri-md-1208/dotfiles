@@ -7,6 +7,7 @@
 # EXPORTS
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="/home/adrian/.oh-my-zsh"
+export SHELL="/usr/bin/zsh"
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
@@ -16,7 +17,8 @@ export UPDATE_ZSH_DAYS=7
 ZSH_THEME="spaceship"
 
 # PLUGINS
-plugins=(git)
+plugins=(git
+  	 zsh-autosuggestions)
 
 # SOURCE
 source $ZSH/oh-my-zsh.sh
@@ -32,8 +34,11 @@ alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.yml"
 # Terminal 
 alias e="exit"
 alias c="clear"
+alias files="ranger"
 # Python
 alias p="python"
 alias py="python"
 alias py3="python3"
 alias py2="python2"
+# System
+alias update="sudo pacman -Syu"

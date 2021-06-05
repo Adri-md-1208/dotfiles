@@ -14,6 +14,8 @@ import socket
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun"
+browser = "firefox"
+player = "spotify"
 
 #######################################
 #   KEYS                              #
@@ -50,6 +52,8 @@ keys = [
     # Spawn apps
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "r", lazy.spawn(menu)),
+    Key([mod], "f", lazy.spawn(browser)),
+    Key([mod], "s", lazy.spawn(player)),
 
     # Toggle between layouts 
     Key([mod], "Tab", lazy.next_layout()),
@@ -119,7 +123,6 @@ layouts_conf = {
     'border_width': 2,
     'margin': 10
     }
-
 layouts = [
       layout.MonadTall(**layouts_conf),
       layout.MonadWide(**layouts_conf),
@@ -213,7 +216,8 @@ screens = [
                     colour_no_updates=colors['Inactive'],
                     display_format='{updates}',
                     distro='Arch',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+                    mouse_callbacks = {'Button1': lambda:
+                        qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                     update_interval=1800,
                     no_update_string='0'
                     ),
@@ -244,8 +248,7 @@ screens = [
                     ),
                 widget.Net(
                     **base(fg='Red'),
-                    interface="wlan0",
-                    format='{interface}',
+                    format='{down} ↓↑ {up}',
                     padding=5,
                     update_interval=1
                     ),
@@ -295,8 +298,10 @@ screens = [
                 separator()
             ],
             30,
+
         ),
     ),
+    Screen()
 ]
 
 #######################################
@@ -332,5 +337,6 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+reconfigure_screens = True
 
 wmname = "LG3D"
