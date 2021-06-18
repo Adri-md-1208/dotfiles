@@ -3,19 +3,20 @@
 # @Adri-md-1208
 # adri.md.2001@gmail.com
 # 2021
-
 from typing import List
-from libqtile import bar, layout, widget, qtile
+from libqtile import bar, layout, widget, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os
 import socket
+import subprocess
 
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun"
 browser = "firefox"
 player = "spotify"
+resources = "gnome-system-monitor"
 
 #######################################
 #   KEYS                              #
@@ -163,7 +164,7 @@ def separator():
             linewidth=0,
             padding=10
             )
-    
+
 def pipe():
     return widget.TextBox(
             **base(fg='Inactive'),
@@ -228,7 +229,8 @@ screens = [
                     ),
                 widget.Memory(
                     **base(fg='Green'),
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                    mouse_callbacks = {'Button1': lambda:
+                        qtile.cmd_spawn(resources)},
                     padding = 5
                     ),
                 pipe(),
@@ -239,7 +241,8 @@ screens = [
                 widget.CPU(
                     **base(fg='Orange'),
                     format='{freq_current}GHz {load_percent}%',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')}
+                    mouse_callbacks = {'Button1': lambda:
+                        qtile.cmd_spawn(resources)}
                     ),
                 pipe(),
                 icon(
@@ -287,13 +290,13 @@ screens = [
                     ),
                 pipe(),
                 widget.Systray(
-                    **base(), 
+                    **base(),
                     padding=5
                     ),
                 separator(),
                 widget.Clock(
-                    **base(fg='Yellow'), 
-                    format='[%d/%m - %H:%M]'
+                    **base(fg='Yellow'),
+                    format='%d/%m · %H:%M'
                     ),
                 separator()
             ],
@@ -338,5 +341,10 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
+
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
 
 wmname = "LG3D"
