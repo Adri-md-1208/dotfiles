@@ -27,8 +27,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Config files
 alias cdd="cd ~/dotfiles"
-alias vv="vim ~/dotfiles/vim/.vimrc"
-alias vz="vim ~/dotfiles/zsh/.zshrc"
+alias vv="vim ~/dotfiles/vim/.vimrc" alias vz="vim ~/dotfiles/zsh/.zshrc"
 alias vq="vim ~/dotfiles/qtile/.config/qtile/config.py"
 alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.yml"
 # Terminal 
@@ -42,3 +41,10 @@ alias py3="python3"
 alias py2="python2"
 # System
 alias update="sudo pacman -Syu"
+# Shell scripts
+alias nf="neofetch"
+alias pf="pfetch"
+alias cs="colorscript random"
+
+# Start zsh
+pf
