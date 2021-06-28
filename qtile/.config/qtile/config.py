@@ -3,20 +3,22 @@
 # @Adri-md-1208
 # adri.md.2001@gmail.com
 # 2021
-from typing import List
+
+
 from libqtile import bar, layout, widget, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os
-import socket
 import subprocess
 
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun"
 browser = "firefox"
-player = "spotify"
+music_player = "spotify"
+video_player = "vlc"
 resources = "gnome-system-monitor"
+network = "nm-connection-editor"
 
 #######################################
 #   KEYS                              #
@@ -54,9 +56,10 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "r", lazy.spawn(menu)),
     Key([mod], "f", lazy.spawn(browser)),
-    Key([mod], "s", lazy.spawn(player)),
+    Key([mod], "s", lazy.spawn(music_player)),
+    Key([mod], "v", lazy.spawn(video_player)),
 
-    # Toggle between layouts 
+    # Toggle between layouts
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "w", lazy.window.kill()),
 
@@ -70,7 +73,7 @@ keys = [
 #   GROUPS                            #
 #######################################
 
-group_list = ['DEV', 'WEB', 'MUS', 'VID', 'DOC', 'SYS', 'PY3', 'JAVA']
+group_list = ['DEV', 'WEB', 'MUS', 'VID', 'DOC', 'SYS']
 groups = [Group(name) for name in group_list]
 
 for i, group in enumerate(groups):
@@ -84,33 +87,33 @@ for i, group in enumerate(groups):
 #######################################
 
 dracula = {
-    'Background': '#282a36',
-    'Foreground': '#f8f8f2',
-    'Inactive':   '#6272a4',
-    'Blue':       '#8be9fd',
-    'Green':      '#50fa7b',
-    'Orange':     '#ffb86c',
-    'Pink':       '#ff79c6',
-    'Purple':     '#bd93f9',
-    'Red':        '#ff5555',
-    'Yellow':     '#f1fa8c',
-    'Background2':'#44475a',
-    'Salmon':     '#ff9580'
+    'Background':  '#282a36',
+    'Foreground':  '#f8f8f2',
+    'Inactive':    '#6272a4',
+    'Blue':        '#8be9fd',
+    'Green':       '#50fa7b',
+    'Orange':      '#ffb86c',
+    'Pink':        '#ff79c6',
+    'Purple':      '#bd93f9',
+    'Red':         '#ff5555',
+    'Yellow':      '#f1fa8c',
+    'Background2': '#44475a',
+    'Salmon':      '#ff9580'
     }
 
 gruvbox = {
-    'Background': '#282828',
-    'Foreground': '#ebdbb2',
-    'Inactive':   '#a89984',
-    'Blue':       '#458588',
-    'Green':      '#98971a',
-    'Orange':     '#fe8019',
-    'Pink':       '#d3869b',
-    'Purple':     '#b16286',
-    'Red':        '#cc241d',
-    'Yellow':     '#fabd2f',
-    'Background2':'#504945',
-    'Salmon':     '#8f3f71'
+    'Background':  '#282828',
+    'Foreground':  '#ebdbb2',
+    'Inactive':    '#a89984',
+    'Blue':        '#458588',
+    'Green':       '#98971a',
+    'Orange':      '#fe8019',
+    'Pink':        '#d3869b',
+    'Purple':      '#b16286',
+    'Red':         '#cc241d',
+    'Yellow':      '#fabd2f',
+    'Background2': '#504945',
+    'Salmon':      '#8f3f71'
     }
 
 colors = gruvbox
@@ -131,14 +134,14 @@ layouts = [
       layout.Columns(
           border_width=0
           ),
-    # layout.Stack(),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+      # layout.Stack(),
+      # layout.Bsp(),
+      # layout.Matrix(),
+      # layout.RatioTile(),
+      # layout.Tile(),
+      # layout.TreeTab(),
+      # layout.VerticalTile(),
+      # layout.Zoomy(),
     ]
 
 #######################################
@@ -152,11 +155,13 @@ widget_defaults = {
     }
 extension_defaults = widget_defaults.copy()
 
-def base(fg='Foreground', bg='Background'): 
+
+def base(fg='Foreground', bg='Background'):
     return {
         'foreground': colors[fg],
         'background': colors[bg]
         }
+
 
 def separator():
     return widget.Sep(
@@ -165,11 +170,13 @@ def separator():
             padding=10
             )
 
+
 def pipe():
     return widget.TextBox(
             **base(fg='Inactive'),
             text='|'
             )
+
 
 def icon(fg='Foreground', bg='Background', fontsize=18, text="?"):
     return widget.TextBox(
@@ -182,17 +189,18 @@ def icon(fg='Foreground', bg='Background', fontsize=18, text="?"):
 #   SCREENS                           #
 #######################################
 
+
 screens = [
     Screen(
         top=bar.Bar(
             [
                 separator(),
-                #icon(text='  ', fg='Blue'),
-                #separator(),
+                # icon(text='  ', fg='Blue'),
+                # separator(),
                 widget.GroupBox(
                     **base(),
-                    margin_y = 5,
-                    margin_x = 0,
+                    margin_y=2,
+                    margin_x=0,
                     active=colors['Foreground'],
                     inactive=colors['Inactive'],
                     highlight_method='block',
@@ -206,8 +214,7 @@ screens = [
                     ),
                 widget.Cmus(
                     **base(),
-                    ),
-                icon(
+                    ), icon(
                     text='  ',
                     fg='Inactive'
                     ),
@@ -216,10 +223,10 @@ screens = [
                     colour_have_updates=colors['Foreground'],
                     colour_no_updates=colors['Inactive'],
                     display_format='{updates}',
-                    distro='Arch',
-                    mouse_callbacks = {'Button1': lambda:
-                        qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
-                    update_interval=1800,
+                    distro='Arch_checkupdates',
+                    mouse_callbacks={'Button1': lambda:
+                                     qtile.cmd_spawn(terminal + ' -e paru')},
+                    update_interval=300,
                     no_update_string='0'
                     ),
                 pipe(),
@@ -229,9 +236,9 @@ screens = [
                     ),
                 widget.Memory(
                     **base(fg='Green'),
-                    mouse_callbacks = {'Button1': lambda:
-                        qtile.cmd_spawn(resources)},
-                    padding = 5
+                    mouse_callbacks={'Button1': lambda:
+                                     qtile.cmd_spawn(resources)},
+                    padding=5
                     ),
                 pipe(),
                 icon(
@@ -241,8 +248,8 @@ screens = [
                 widget.CPU(
                     **base(fg='Orange'),
                     format='{freq_current}GHz {load_percent}%',
-                    mouse_callbacks = {'Button1': lambda:
-                        qtile.cmd_spawn(resources)}
+                    mouse_callbacks={'Button1': lambda:
+                                     qtile.cmd_spawn(resources)}
                     ),
                 pipe(),
                 icon(
@@ -253,7 +260,9 @@ screens = [
                     **base(fg='Red'),
                     format='{down} ↓↑ {up}',
                     padding=5,
-                    update_interval=1
+                    update_interval=1,
+                    mouse_callbacks={'Button1': lambda:
+                                     qtile.cmd_spawn(network)}
                     ),
                 pipe(),
                 icon(
@@ -300,7 +309,7 @@ screens = [
                     ),
                 separator()
             ],
-            30,
+            28,
 
         ),
     ),
@@ -342,9 +351,11 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
+
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
+
 
 wmname = "LG3D"
