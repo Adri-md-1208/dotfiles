@@ -1,0 +1,5 @@
+* {
+  background:       #282828;
+  focus:            #504945;
+  foreground:       #ebdbb2;
+}

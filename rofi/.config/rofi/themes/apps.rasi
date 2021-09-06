@@ -1,0 +1,39 @@
+@import "colorschemes/gruvbox.rasi"
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: "Caskaydia Cove Nerd Font 15";
+  border-radius: 2px;
+  width: 512px;
+}
+
+prompt {
+  padding: 16px;
+}
+
+textbox {
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 16px;
+}
+
+element {
+  padding: 16px;
+}
+
+element-text {
+  background-color: transparent;
+}
+
+element selected {
+  background-color: @focus;
+}
+
+element-icon {
+  size: 22px;
+  border: 2px;
+  background-color: transparent;
+}
