@@ -43,6 +43,7 @@ Plug 'Valloric/YouCompleteMe'
 " Python
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 call plug#end()
 
@@ -101,3 +102,6 @@ nmap <leader>q :q<CR>
 nmap <leader>c ciw
 nmap <leader>f :FZF<CR>
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Run Python code
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>

@@ -5,7 +5,8 @@
 # 2021
 
 # EXPORTS
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$HOME/bin:/usr/local/bin/:$PATH:$DOTNET_ROOT
 export ZSH="/home/adrian/.oh-my-zsh"
 export SHELL="/usr/bin/zsh"
 export MANPATH="/usr/local/man:$MANPATH"
@@ -24,7 +25,6 @@ plugins=(git
 source $ZSH/oh-my-zsh.sh
 
 # ALIAS
-#
 # Config files
 alias cdd="cd ~/dotfiles"
 alias vv="vim ~/dotfiles/vim/.vimrc" alias vz="vim ~/dotfiles/zsh/.zshrc"
@@ -34,6 +34,12 @@ alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.yml"
 alias e="exit"
 alias c="clear"
 alias files="ranger"
+alias sd="shutdown"
+# Exa
+alias ls='exa -la --color=always --group-directories-first'
+alias la='exa -a --color=always --group-directories-first'
+alias ll='exa -l --color=always --group-directories-first'
+alias l.='exa -a | egrep "^\."'
 # Python
 alias p="python"
 alias py="python"
@@ -47,4 +53,4 @@ alias pf="pfetch"
 alias cs="colorscript random"
 
 # Start zsh
-pf
+
