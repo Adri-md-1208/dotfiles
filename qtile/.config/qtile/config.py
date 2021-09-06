@@ -13,7 +13,8 @@ import subprocess
 
 mod = "mod4"
 terminal = "alacritty"
-menu = "rofi -show drun"
+menu = "rofi -show drun -theme ~/dotfiles/rofi/.config/rofi/themes/apps.rasi"
+powermenu = 'rofi -show menu -modi "menu:rofi-power-menu"'
 browser = "firefox"
 music_player = "spotify"
 video_player = "vlc"
@@ -123,7 +124,7 @@ colors = gruvbox
 #######################################
 
 layouts_conf = {
-    'border_focus': colors['Green'],
+    'border_focus': colors['Inactive'],
     'border_width': 2,
     'margin': 10
     }
@@ -305,7 +306,15 @@ screens = [
                 separator(),
                 widget.Clock(
                     **base(fg='Yellow'),
-                    format='%d/%m · %H:%M'
+                    format='%d/%m  %H:%M'
+                    ),
+                pipe(),
+                widget.TextBox(
+                    **base(),
+                    text=" ⏻ ",
+                    fontsize=16,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(powermenu)},
                     ),
                 separator()
             ],
