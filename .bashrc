@@ -1,28 +1,14 @@
-# ZSH CONFIG
+# BASH CONFIG
 #
 # @Adri-md-1208
 # adri.md.2001@gmail.com
 # 2021
 
 # EXPORTS
-export DOTNET_ROOT=$HOME/dotnet
-export PATH=$HOME/bin:/usr/local/bin/:$PATH:$DOTNET_ROOT
-export ZSH="/home/adrian/.oh-my-zsh"
-export SHELL="/usr/bin/zsh"
-export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
-export UPDATE_ZSH_DAYS=7
-export ZSH_THEME="spaceship"
 export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
-
-# PLUGINS
-plugins=(git
-  	 sudo
-  	 zsh-autosuggestions)
-
-# SOURCE
-source $ZSH/oh-my-zsh.sh
+export OSH_THEME="powerline"
 
 # ALIAS
 # Config files
@@ -44,6 +30,7 @@ alias ls='exa -la --icons --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first'
 alias ll='exa -l --color=always --group-directories-first'
 alias l.='exa -a | egrep "^\."'
+alias l=ls
 # Python
 alias p="python"
 alias py="python"
@@ -57,5 +44,5 @@ alias pf="pfetch"
 alias cs="colorscript random"
 alias pcs="pokemon-colorscripts -r"
 
-# Start zsh
+# Start bash
 pokemon-colorscripts -r 1-4
