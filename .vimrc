@@ -45,6 +45,9 @@ Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
+" XML
+Plug 'sukima/xmledit' 
+
 call plug#end()
 
 " Themes
