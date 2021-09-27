@@ -44,6 +44,12 @@ alias nf="neofetch"
 alias pf="pfetch"
 alias cs="colorscript random"
 alias pcs="pokemon-colorscripts -r"
+# Git
+alias gss="git status --short"
+alias gp="git push"
+alias gcm="git commit -m"
+alias ga="git add"
+alias gd="git diff @{upstream}"
 
 # HSTR configuration
 alias hh=hstr                    # hh to be alias for hstr
@@ -59,7 +65,13 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
+# PROMPT
+function _update_ps1() {
+  PS1=$(powerline-shell $?)
+}
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+  PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
 # Start bash
 pokemon-colorscripts -r 1-4
-
-

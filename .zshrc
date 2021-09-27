@@ -15,11 +15,12 @@ export EDITOR='vim'
 export UPDATE_ZSH_DAYS=7
 export ZSH_THEME="spaceship"
 export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # PLUGINS
-plugins=(git
-  	 sudo
-  	 zsh-autosuggestions)
+plugins=(sudo
+  	zsh-autosuggestions
+	git-prompt)
 
 # SOURCE
 source $ZSH/oh-my-zsh.sh
@@ -39,11 +40,17 @@ alias e="exit"
 alias c="clear"
 alias files="ranger"
 alias sd="shutdown"
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
+
 # Exa
 alias ls='exa -la --icons --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first'
 alias ll='exa -l --color=always --group-directories-first'
 alias l.='exa -a | egrep "^\."'
+# Bat
+alias cat='bat'
 # Python
 alias p="python"
 alias py="python"
@@ -56,6 +63,12 @@ alias nf="neofetch"
 alias pf="pfetch"
 alias cs="colorscript random"
 alias pcs="pokemon-colorscripts -r"
+# Git
+alias gss="git status --short"
+alias gp="git push"
+alias gcm="git commit -m"
+alias ga="git add"
+alias gd="git diff @{upstream}"
 
 # HSTR configuration
 alias hh=hstr                    # hh to be alias for hstr
@@ -66,5 +79,6 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode che
 
 # Start zsh
 pokemon-colorscripts -r 1-4
-
-
+if [ -f /etc/bash.command-not-found ]; then
+      . /etc/bash.command-not-found
+fi
