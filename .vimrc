@@ -7,17 +7,18 @@
 set number
 set mouse=a
 set numberwidth=1
-set clipboard=unnamed
-syntax enable
+set clipboard=unnamedplus
 set showcmd
 set ruler
 set encoding=utf-8
 set showmatch 
+set matchtime=3
 set sw=2
 set relativenumber
 set laststatus=2
 set noshowmode
-" set fillchars=eob:\ ,
+set nohlsearch
+syntax enable
 
 call plug#begin('~/.vim/plugged')
 
@@ -25,7 +26,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim',{'as':'dracula'}
 Plug 'morhetz/gruvbox'
 
-" Airline
+" Status bar
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 
@@ -36,9 +37,14 @@ Plug 'christoomey/vim-tmux-navigator'
 " Files
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Autocompletion
 Plug 'Valloric/YouCompleteMe'
+Plug 'alvan/vim-closetag'
+
+" Style
+Plug 'ryanoasis/vim-devicons'
 
 " Python
 Plug 'vim-syntastic/syntastic'
