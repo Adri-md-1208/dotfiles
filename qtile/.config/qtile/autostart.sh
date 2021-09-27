@@ -1,6 +1,6 @@
 #!/bin/sh
 
 picom &
-nitrogen --restore &
+nitrogen --set-scaled --random &
 xbindkeys
 nm-applet &

@@ -14,12 +14,13 @@ import subprocess
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun -theme ~/dotfiles/rofi/.config/rofi/themes/apps.rasi"
-powermenu = 'rofi -show menu -modi "menu:rofi-power-menu"'
 browser = "firefox"
 music_player = "spotify"
 video_player = "vlc"
-resources = "gnome-system-monitor"
+resources = "stacer"
 network = "nm-connection-editor"
+doc_reader = "zathura"
+aur = "yay"
 
 #######################################
 #   KEYS                              #
@@ -59,6 +60,7 @@ keys = [
     Key([mod], "f", lazy.spawn(browser)),
     Key([mod], "s", lazy.spawn(music_player)),
     Key([mod], "v", lazy.spawn(video_player)),
+    Key([mod], "p", lazy.spawn(doc_reader)),
 
     # Toggle between layouts
     Key([mod], "Tab", lazy.next_layout()),
@@ -195,9 +197,6 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                separator(),
-                # icon(text='  ', fg='Blue'),
-                # separator(),
                 widget.GroupBox(
                     **base(),
                     margin_y=2,
@@ -226,7 +225,7 @@ screens = [
                     display_format='{updates}',
                     distro='Arch_checkupdates',
                     mouse_callbacks={'Button1': lambda:
-                                     qtile.cmd_spawn(terminal + ' -e paru')},
+                                     qtile.cmd_spawn(terminal + ' -e ' + aur)},
                     update_interval=300,
                     no_update_string='0'
                     ),
@@ -303,18 +302,10 @@ screens = [
                     **base(),
                     padding=5
                     ),
-                separator(),
+                pipe(),
                 widget.Clock(
                     **base(fg='Yellow'),
-                    format='%d/%m  %H:%M'
-                    ),
-                pipe(),
-                widget.TextBox(
-                    **base(),
-                    text=" ⏻ ",
-                    fontsize=16,
-                    mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(powermenu)},
+                    format='%d/%m %H:%M'
                     ),
                 separator()
             ],
