@@ -49,7 +49,7 @@ font:
   bold_italic:
     family: CaskaydiaCove Nerd Font
     style: Bold Italic
-  size: 10
+  size: 9
   offset:
     x: 0
     y: 0
@@ -70,8 +70,8 @@ schemes:
       bright_foreground: '#f9f5d7'
       dim_foreground:    '#f2e5bc'
     cursor:
-      text:   CellBackground
-      cursor: CellForeground
+      text:   '#fbf1c7'
+      cursor: '#a89984'
     vi_mode_cursor:
       text:   CellBackground
       cursor: CellForeground
@@ -210,3 +210,4 @@ key_bindings:
    - { key: C,              mods: Control,                         action: Copy             } 
    - { key: Plus,           mods: Control,                         action: IncreaseFontSize } 
    - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
+   - { key: F11,                                                   action: ToggleFullscreen }
