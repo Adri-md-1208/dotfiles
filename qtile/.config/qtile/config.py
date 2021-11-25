@@ -21,6 +21,8 @@ resources = "stacer"
 network = "nm-connection-editor"
 doc_reader = "zathura"
 aur = "yay"
+notes = "simplenote"
+mail = "thunderbird"
 
 #######################################
 #   KEYS                              #
@@ -61,6 +63,8 @@ keys = [
     Key([mod], "s", lazy.spawn(music_player)),
     Key([mod], "v", lazy.spawn(video_player)),
     Key([mod], "p", lazy.spawn(doc_reader)),
+    Key([mod], "n", lazy.spawn(notes)),
+    Key([mod, "shift"], "m", lazy.spawn(mail)),
 
     # Toggle between layouts
     Key([mod], "Tab", lazy.next_layout()),
@@ -119,7 +123,37 @@ gruvbox = {
     'Salmon':      '#8f3f71'
     }
 
-colors = gruvbox
+gruvbox_bw = {
+    'Background':  '#282828',
+    'Foreground':  '#ebdbb2',
+    'Inactive':    '#ebdbb2',
+    'Blue':        '#ebdbb2',
+    'Green':       '#ebdbb2',
+    'Orange':      '#ebdbb2',
+    'Pink':        '#ebdbb2',
+    'Purple':      '#ebdbb2',
+    'Red':         '#ebdbb2',
+    'Yellow':      '#ebdbb2',
+    'Background2': '#504945',
+    'Salmon':      '#ebdbb2'
+    }
+
+gruvbox_wb = {
+    'Background':  '#ebdbb2',
+    'Foreground':  '#282828',
+    'Inactive':    '#282828',
+    'Blue':        '#282828',
+    'Green':       '#282828',
+    'Orange':      '#282828',
+    'Pink':        '#282828',
+    'Purple':      '#282828',
+    'Red':         '#282828',
+    'Yellow':      '#282828',
+    'Background2': '#504945',
+    'Salmon':      '#282828'
+    }
+
+colors = gruvbox_bw
 
 #######################################
 #   LAYOUTS                           #
@@ -226,7 +260,7 @@ screens = [
                     distro='Arch_checkupdates',
                     mouse_callbacks={'Button1': lambda:
                                      qtile.cmd_spawn(terminal + ' -e ' + aur)},
-                    update_interval=300,
+                    update_interval=60,
                     no_update_string='0'
                     ),
                 pipe(),
@@ -333,7 +367,7 @@ mouse = [
 #######################################
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
+dgroups_app_rules = []
 main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
@@ -358,4 +392,4 @@ def start_once():
     subprocess.call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
 
 
-wmname = "LG3D"
+wmname = "Qtile"

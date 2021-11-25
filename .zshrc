@@ -6,7 +6,7 @@
 
 # EXPORTS
 export DOTNET_ROOT=$HOME/dotnet
-export PATH=$HOME/bin:/usr/local/bin/:$PATH:$DOTNET_ROOT
+export PATH=$HOME/bin:/usr/local/bin/:$PATH:$DOTNET_ROOT:$HOME/.local/bin
 export ZSH="/home/adrian/.oh-my-zsh"
 export SHELL="/usr/bin/zsh"
 export MANPATH="/usr/local/man:$MANPATH"
@@ -78,7 +78,7 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode che
 
 
 # Start zsh
-pokemon-colorscripts -r 1-4
+#pokemon-colorscripts -r 1-4
 if [ -f /etc/bash.command-not-found ]; then
       . /etc/bash.command-not-found
 fi
