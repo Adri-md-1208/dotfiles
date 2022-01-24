@@ -14,9 +14,9 @@ Sure!, they are distributed under GPLv3 license. Be free to modify it and share 
 ![screnshoot](assets/images/screenshot.png)
 
 ## Table of Contents
--    [Window Manager configs](#wmconfigs)
--    [Terminal configs](#termconfigs)
--    [Other configs](#otherconfigs)
+-    [Window Manager configs](#window-manager-configs)
+-    [Terminal configs](#terminal-configs)
+-    [Other configs](#other-configs)
 -    [Usage](#usage)
 -    [License](#license)
 
@@ -25,12 +25,13 @@ Sure!, they are distributed under GPLv3 license. Be free to modify it and share 
 
 ### Terminal configs
 - [alacritty](https://github.com/Adri-md-1208/dotfiles/tree/main/alacritty/.config/alacritty)
-- [xterm](https://github.com/Adri-md-1208/dotfiles/blob/main/.Xresources)
-- [bash](https://github.com/Adri-md-1208/dotfiles/blob/main/.bashrc)
-- [zsh](https://github.com/Adri-md-1208/dotfiles/blob/main/.zshrc)
+- [xterm](https://github.com/Adri-md-1208/dotfiles/tree/main/Xresources)
+- [bash](https://github.com/Adri-md-1208/dotfiles/tree/main/bash)
+- [zsh](https://github.com/Adri-md-1208/dotfiles/tree/main/zsh)
 
 ### Other configs
 - [rofi](https://github.com/Adri-md-1208/dotfiles/tree/main/rofi/.config/rofi)
+- [git](https://github.com/Adri-md-1208/dotfiles/tree/main/git)
 
 ## Usage
 Clone the repo locally and move the files to your $HOME/.config directory.

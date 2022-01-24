@@ -5,21 +5,27 @@
 # adri.md.2001@gmail.com
 # 2022
 
-if [ "$(id -u)" = 0 ]; then
-  echo -e "\e[31mRuning this script as root may make adverse changes in your system\e[0m"
+if [ "$(id -u)" -eq 0 ]; then
+  echo -e "\e[31mRuning this script as root may make adverse changes in your system.\e[0m"
   echo -e "\e[31mPlease, run as non-root user\e[0m"
   exit 1
 fi
 
+# Message functions
 function error_msg { 
   case "$1" in
     1)
       msg="Pacman error" 
       ;;
+    2)
+      msg="There is no $HOME directory"
+      ;;
+    3)
+      msg="There is already a dotfiles repository"
+      ;;
     *)
       msg="Unkown error"
-      ;;
-  esac
+      ;; esac
   printf "\e[31m\n[Error %d]\e[0m \e[33m%s\n\e[0m" "$1" "$msg" >&2
   exit 1
 }
@@ -33,11 +39,23 @@ function informative_msg {
 }
 
 # UPGRADE AND SYNC PACMAN
-informative_msg "Upgrading and syncing the repos of pacman"
-sudo pacman --noconfirm --needed --noprogressbar --quiet -Syu 2> /dev/null ||
-  error_msg 1
+informative_msg "Upgrading and syncing the repositories of pacman"
+sudo pacman --noconfirm --needed --quiet -Syu 2> /dev/null || error_msg 1
 
 # INSTALL PACKAGES
-sudo cat pkgs.txt | sudo pacman --needed -Sy - ||
-  error_msg 1
-[ -d ~/.config ] || mkdir ~/.config
+informative_msg "Installing necessary packages"
+sudo cat pkgs.txt | sudo pacman --needed -Sy - || error_msg 1
+
+# CREATE THE NECESSARY DIRECTORIES AND ENV VARIABLES
+[ -e "$HOME" ] || export "$HOME=~/"
+[ -d "$HOME"/.config ] || mkdir "$HOME"/.config
+
+# DOWNLOADING THE DOTFILES GIT REPOSITORY
+cd "$HOME" || error_msg 2
+git clone https://github.com/Adri-md-1208/dotfiles.git 2> /dev/null || error_msg 3
+
+# STOWING THE DOTFILES
+dotfiles=("qtile" "alacritty" "rofi" "zsh" "bash" "vim" "git" "Xresources")
+for dotfile in "${dotfiles[@]}"; do
+  stow --verbose "$dotfile"
+done
