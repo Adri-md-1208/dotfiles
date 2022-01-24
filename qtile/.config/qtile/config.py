@@ -85,7 +85,7 @@ groups = [Group(name) for name in group_list]
 
 for i, group in enumerate(groups):
     keys.extend([
-        Key([mod], str(i+1), lazy.group[group.name].toscreen()),
+        Key([mod], str(i+1), lazy.group[group.name].toscreen(toggle=True)),
         Key([mod, "shift"], str(i+1), lazy.window.togroup(group.name)),
     ])
 
@@ -153,7 +153,7 @@ gruvbox_wb = {
     'Salmon':      '#282828'
     }
 
-colors = gruvbox_bw
+colors = gruvbox
 
 #######################################
 #   LAYOUTS                           #
@@ -344,7 +344,7 @@ screens = [
                 separator()
             ],
             28,
-
+            opacity=0.85,
         ),
     ),
     Screen()

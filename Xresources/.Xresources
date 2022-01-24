@@ -1,0 +1,52 @@
+! XTERM CONFIG
+!
+! @Adri-md-1208
+! adri.md.2001@gmail.com
+! 2021
+
+! Font
+xterm*faceName: Caskaydia Cove Nerd Font
+xterm*faceSize: 15
+
+! Scrollback
+xterm*savelines: 4096
+
+! Colors
+xterm*foreground:   #f8f8f2
+xterm*background:   #282a36
+xterm*cursorColor:  #bbc2cf
+
+! black
+*.color0:       #1c1f24
+*.color8:       #5b6268
+
+! red
+*.color1:       #ff5555
+*.color9:       #da8548
+
+! green
+*.color2:       #50fa7b
+*.color10:      #4db5bd
+
+! yellow
+*.color3:       #f1fa8c
+*.color11:      #ecbe7b
+
+! blue
+*.color4:       #8be9fd
+*.color12:      #3071db
+
+! magenta
+*.color5:       #ff9580
+*.color13:      #a9a1e1
+
+! cyan
+*.color6:       #5699af
+*.color14:      #46d9ff
+
+! white
+*.color7:       #202328
+*.color15:      #dfdfdf
+
+! No scrollbar
+xterm*ScrollBar: false

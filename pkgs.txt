@@ -10,6 +10,7 @@ network-manager-applet
 picom
 sddm
 shellcheck
+stow
 vim
 xf86-input-libinput
 xf86-input-synaptics

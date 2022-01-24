@@ -49,7 +49,7 @@ font:
   bold_italic:
     family: Caskaydia Cove Nerd Font
     style: Bold Italic
-  size: 9
+  size: 8
   offset:
     x: 0
     y: 0
@@ -178,10 +178,10 @@ schemes:
         cyan:    '#427b58'
         white:   '#3c3836'
 
-colors: *gruvbox_light
+colors: *gruvbox_dark
 
 # Opacitty
-background_opacity: 1.0
+window.opacitty: 1.0
 
 # Scape chars
 selection:
