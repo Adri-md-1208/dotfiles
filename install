@@ -12,7 +12,7 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # Message functions
-function error_msg { 
+error_msg() { 
   case "$1" in
     1)
       msg="Pacman error" 
@@ -23,6 +23,9 @@ function error_msg {
     3)
       msg="There is already a dotfiles repository"
       ;;
+    4)
+      msg="There is a trouble setting up the display manager"
+      ;;
     *)
       msg="Unkown error"
       ;; esac
@@ -30,11 +33,11 @@ function error_msg {
   exit 1
 }
 
-function success_msg {
+success_msg() {
   printf "\e[32m\n%s\n\e[0m" "$1"
 }
 
-function informative_msg {
+informative_msg() {
   printf "\e[34m\n  %s\n\n\e[0m" "$1"
 }
 
@@ -55,7 +58,12 @@ cd "$HOME" || error_msg 2
 git clone https://github.com/Adri-md-1208/dotfiles.git 2> /dev/null || error_msg 3
 
 # STOWING THE DOTFILES
+informative_msg "Linking the dotfiles with your $HOME directory"
 dotfiles=("qtile" "alacritty" "rofi" "zsh" "bash" "vim" "git" "Xresources")
 for dotfile in "${dotfiles[@]}"; do
   stow --verbose "$dotfile"
 done
+
+# ENABLE DISPLAY MANAGER
+sudo systemctl disable "$(grep '/usr/s\?bin' /etc/systemd/system/display-manager.service | awk -F / '{print $NF}')" || error_msg 4
+sudo systemctl enable sddm
