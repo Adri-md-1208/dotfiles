@@ -1,4 +1,4 @@
-#Qtile dotfiles
+# Qtile dotfiles
 
 ## Description
 ### What is Qtile?

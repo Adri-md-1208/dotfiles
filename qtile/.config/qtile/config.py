@@ -344,7 +344,7 @@ screens = [
                 separator()
             ],
             28,
-            opacity=0.85,
+            opacity=1,
         ),
     ),
     Screen()
@@ -392,4 +392,4 @@ def start_once():
     subprocess.call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
 
 
-wmname = "Qtile"
+wmname = "LG3D"
