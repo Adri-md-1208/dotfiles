@@ -60,6 +60,7 @@ git clone https://github.com/Adri-md-1208/dotfiles.git 2> /dev/null || error_msg
 # STOWING THE DOTFILES
 informative_msg "Linking the dotfiles with your $HOME directory"
 dotfiles=("qtile" "alacritty" "rofi" "zsh" "bash" "vim" "git" "Xresources")
+cd dotfiles
 for dotfile in "${dotfiles[@]}"; do
   stow --verbose "$dotfile"
 done
