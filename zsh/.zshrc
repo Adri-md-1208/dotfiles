@@ -6,7 +6,7 @@
 
 # EXPORTS
 export DOTNET_ROOT=$HOME/dotnet
-export PATH=$HOME/bin:/usr/local/bin/:$PATH:$DOTNET_ROOT:$HOME/.local/bin
+export PATH=$HOME/bin:/usr/local/bin/:$DOTNET_ROOT:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
 export ZSH="/home/adrian/.oh-my-zsh"
 export SHELL="/usr/bin/zsh"
 export MANPATH="/usr/local/man:$MANPATH"
@@ -33,18 +33,14 @@ alias vz="vim ~/.zshrc"
 alias vx="vim ~/.Xresources"
 alias vq="vim ~/.config/qtile/config.py"
 alias va="vim ~/.config/alacritty/alacritty.yml"
-alias vi3="vim ~/.config/i3/config"
 alias vb="vim ~/.bashrc"
 # Terminal 
-alias e="exit"
-alias c="clear"
 alias files="ranger"
-alias sd="shutdown"
+alias sd="sudo poweroff"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias cdw="cd ~/Downloads"
-
 # Exa
 alias ls='exa -la --icons --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first'

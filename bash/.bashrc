@@ -10,28 +10,27 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+export PS1="\n\[\e[0;32m\][\u \[\e[0m\] \[\e[0;31m\]\w \[\e[0m\]\[\e[0;32m\]]\[\e[0m\] "
 
 # ALIAS
 # Config files
 alias cdd="cd ~/dotfiles"
+alias cdw="cd ~/Downloads"
 alias vv="vim ~/dotfiles/.vimrc"
 alias vz="vim ~/dotfiles/.zshrc"
 alias vx="vim ~/dotfiles/.Xresources"
 alias vq="vim ~/dotfiles/qtile/.config/qtile/config.py"
 alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.yml"
-alias vi3="vim ~/.config/i3/config"
 alias vb="vim ~/.bashrc"
 # Terminal 
-alias e="exit"
-alias c="clear"
 alias files="ranger"
-alias sd="shutdown"
+alias sd="sudo shutdown"
 # Exa
 alias ls='exa -la --icons --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first'
 alias ll='exa -l --color=always --group-directories-first'
 alias l.='exa -a | egrep "^\."'
-alias l=ls
+alias l='exa -la --icons --color=always --group-directories-first'
 # Python
 alias p="python"
 alias py="python"
@@ -65,13 +64,5 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
-# PROMPT
-#function _update_ps1() {
-  #PS1=$(powerline-shell $?)
-#}
-#if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-#  PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-#fi
-
 # Start bash
-pokemon-colorscripts -r 1-4
+pf
