@@ -10,7 +10,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
-export PS1="\n\[\e[0;32m\][\u \[\e[0m\] \[\e[0;31m\]\w \[\e[0m\]\[\e[0;32m\]]\[\e[0m\] "
+export PS1="\n\[\e[01;31m\][\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[01;32m\]@\[\e[0m\]\[\e[01;34m\]\h\[\e[0m\] \[\e[01;35m\]\w\[\e[0m\]\[\e[01;31m\]]\[\e[0m\] " 
 
 # ALIAS
 # Config files
@@ -65,4 +65,3 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 # Start bash
-pf
