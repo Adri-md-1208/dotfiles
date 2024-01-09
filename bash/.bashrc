@@ -11,16 +11,18 @@ export LANG=en_US.UTF-8
 export EDITOR='vim'
 export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
 export PS1="\n\[\e[01;31m\][\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[01;32m\]@\[\e[0m\]\[\e[01;34m\]\h\[\e[0m\] \[\e[01;35m\]\w\[\e[0m\]\[\e[01;31m\]]\[\e[0m\] " 
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
 # ALIAS
 # Config files
 alias cdd="cd ~/dotfiles"
 alias cdw="cd ~/Downloads"
-alias vv="vim ~/dotfiles/.vimrc"
-alias vz="vim ~/dotfiles/.zshrc"
+alias vv="vim ~/dotfiles/vim/.vimrc"
+alias vz="vim ~/dotfiles/zsh/.zshrc"
 alias vx="vim ~/dotfiles/.Xresources"
 alias vq="vim ~/dotfiles/qtile/.config/qtile/config.py"
-alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.yml"
+alias va="vim ~/dotfiles/alacritty/.config/alacritty/alacritty.toml"
 alias vb="vim ~/.bashrc"
 # Terminal 
 alias files="ranger"
