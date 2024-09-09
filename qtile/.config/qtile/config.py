@@ -2,15 +2,20 @@
 #
 # @Adri-md-1208
 # adri.md.2001@gmail.com
-# 2021
+# 2024
 
 
+# Standard library
+import os
+from subprocess import call, check_output, run
+
+# Qtile lib
 from libqtile import bar, layout, widget, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-import os
-import subprocess
 
+
+# Applications
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun -theme ~/dotfiles/rofi/.config/rofi/themes/apps.rasi"
@@ -21,8 +26,9 @@ resources = "stacer"
 network = "nm-connection-editor"
 doc_reader = "zathura"
 aur = "yay"
-notes = "simplenote"
+notes = "notion-app"
 mail = "thunderbird"
+screenshot = "lightscreen"
 
 #######################################
 #   KEYS                              #
@@ -65,6 +71,7 @@ keys = [
     Key([mod], "p", lazy.spawn(doc_reader)),
     Key([mod], "n", lazy.spawn(notes)),
     Key([mod, "shift"], "m", lazy.spawn(mail)),
+    Key([mod], "c", lazy.spawn(screenshot)),
 
     # Toggle between layouts
     Key([mod], "Tab", lazy.next_layout()),
@@ -80,7 +87,7 @@ keys = [
 #   GROUPS                            #
 #######################################
 
-group_list = ['DEV', 'WEB', 'MUS', 'VID', 'DOC', 'SYS']
+group_list = ['DEV', 'WEB', 'MUS', 'VID', 'DOC', 'SYS', 'COM']
 groups = [Group(name) for name in group_list]
 
 for i, group in enumerate(groups):
@@ -202,25 +209,25 @@ def base(fg='Foreground', bg='Background'):
 
 def separator():
     return widget.Sep(
-            **base(),
-            linewidth=0,
-            padding=10
-            )
+        **base(),
+        linewidth=0,
+        padding=10
+        )
 
 
 def pipe():
     return widget.TextBox(
-            **base(fg='Inactive'),
-            text='|'
-            )
+        **base(fg='Inactive'),
+        text='|'
+        )
 
 
 def icon(fg='Foreground', bg='Background', fontsize=18, text="?"):
     return widget.TextBox(
-         **base(fg, bg),
-         fontsize=fontsize,
-         text=text,
-         )
+        **base(fg, bg),
+        fontsize=fontsize,
+        text=text,
+        )
 
 #######################################
 #   SCREENS                           #
@@ -249,7 +256,7 @@ screens = [
                 widget.Cmus(
                     **base(),
                     ), icon(
-                    text='  ',
+                    text=' ',
                     fg='Inactive'
                     ),
                 widget.CheckUpdates(
@@ -257,7 +264,7 @@ screens = [
                     colour_have_updates=colors['Foreground'],
                     colour_no_updates=colors['Inactive'],
                     display_format='{updates}',
-                    distro='Arch_checkupdates',
+                    distro='Arch_yay',
                     mouse_callbacks={'Button1': lambda:
                                      qtile.cmd_spawn(terminal + ' -e ' + aur)},
                     update_interval=60,
@@ -265,42 +272,44 @@ screens = [
                     ),
                 pipe(),
                 icon(
-                    text='  ',
+                    text=' ',
                     fg='Green'
                     ),
                 widget.Memory(
                     **base(fg='Green'),
+                    format='{MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}',
+                    update_interval=3,
                     mouse_callbacks={'Button1': lambda:
                                      qtile.cmd_spawn(resources)},
-                    padding=5
                     ),
                 pipe(),
                 icon(
-                    text='  ',
+                    text='',
                     fg='Orange'
                     ),
                 widget.CPU(
                     **base(fg='Orange'),
                     format='{freq_current}GHz {load_percent}%',
+                    update_interval=3,
                     mouse_callbacks={'Button1': lambda:
                                      qtile.cmd_spawn(resources)}
                     ),
                 pipe(),
                 icon(
-                    text='  ',
+                    text='󰀂 ',
                     fg='Red'
                     ),
                 widget.Net(
                     **base(fg='Red'),
-                    format='{down} ↓↑ {up}',
+                    format='{down: .2f} ↓↑{up: .2f}',
                     padding=5,
-                    update_interval=1,
+                    update_interval=3,
                     mouse_callbacks={'Button1': lambda:
                                      qtile.cmd_spawn(network)}
                     ),
                 pipe(),
                 icon(
-                    text=' 盛 ',
+                    text='盛',
                     fg='Pink'
                     ),
                 widget.Backlight(
@@ -310,7 +319,7 @@ screens = [
                     ),
                 pipe(),
                 icon(
-                    text=' 墳',
+                    text='墳',
                     fg='Purple'
                     ),
                 widget.Volume(
@@ -318,13 +327,12 @@ screens = [
                     padding=5
                     ),
                 pipe(),
-                icon(
-                    text=' ',
-                    fg='Salmon'
-                    ),
                 widget.Battery(
                     **base(fg='Salmon'),
-                    format='{percent:2.0%}'
+                    charge_char='',
+                    discharge_char='󰁾',
+                    format='{char} {percent:2.0%}',
+                    update_interval=1
                     ),
                 pipe(),
                 widget.CurrentLayoutIcon(
@@ -389,7 +397,7 @@ reconfigure_screens = True
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
+    call([home + '/dotfiles/qtile/.config/qtile/autostart.sh'])
 
 
 wmname = "LG3D"
