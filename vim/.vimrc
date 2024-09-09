@@ -48,9 +48,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ap/vim-css-color'
 
 " Python
-Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 " XML
 Plug 'sukima/xmledit' 
@@ -62,8 +60,8 @@ call plug#end()
 
 " Themes
 colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark = 'hard'
+set background=light
+"let g:gruvbox_contrast_dark = 'hard'
 hi Normal guibg=NONE ctermbg=NONE
 
 " Pathogen
@@ -87,17 +85,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" Python
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-let python_highlight_all=1
 
 " Web development
 au BufNewFile,BufRead *.js, *.html, *.css, *.xml
