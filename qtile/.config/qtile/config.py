@@ -19,7 +19,7 @@ from libqtile.lazy import lazy
 mod = "mod4"
 terminal = "alacritty"
 menu = "rofi -show drun -theme ~/dotfiles/rofi/.config/rofi/themes/apps.rasi"
-browser = "firefox"
+browser = "brave"
 music_player = "spotify"
 video_player = "vlc"
 resources = "stacer"
@@ -65,7 +65,7 @@ keys = [
     # Spawn apps
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "r", lazy.spawn(menu)),
-    Key([mod], "f", lazy.spawn(browser)),
+    Key([mod], "b", lazy.spawn(browser)),
     Key([mod], "s", lazy.spawn(music_player)),
     Key([mod], "v", lazy.spawn(video_player)),
     Key([mod], "p", lazy.spawn(doc_reader)),
