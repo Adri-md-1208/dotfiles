@@ -28,7 +28,7 @@ doc_reader = "zathura"
 aur = "yay"
 notes = "notion-app"
 mail = "thunderbird"
-screenshot = "lightscreen"
+screenshot = "flameshot"
 
 #######################################
 #   KEYS                              #
@@ -335,7 +335,7 @@ screens = [
                     update_interval=1
                     ),
                 pipe(),
-                widget.CurrentLayoutIcon(
+                widget.CurrentLayout(
                     **base(),
                     scale=0.5
                     ),
